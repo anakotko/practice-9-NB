@@ -1,10 +1,16 @@
-public class MainFirstTread {
+public class MainFirstThread {
     public static void main(String[] args) {
-        Thread thread = new Thread();
         Runnable task = () -> {
             for (int i = 0; i < 5; i++) {
-                System.out.println();
+                System.out.println("Привет из потока!");
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                }
             }
-        }
+        };
+        Thread thread = new Thread(task);
+        thread.start();
     }
 }
